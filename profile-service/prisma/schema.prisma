@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum VerificationStatus {
+  Unverified
+  Verified
+}
+
+enum SubscriptionStatus {
+  Expired
+  Active
+  Undefined
+}
+
+model Users {
+  id                  Int                @id @default(autoincrement()) @db.Int
+  fname               String             @db.VarChar(150)
+  lname               String             @db.VarChar(150)
+  email               String             @unique @db.VarChar(150)
+  password            String             @db.VarChar(150)
+  verification_status VerificationStatus @default(Unverified)
+  subscription_status SubscriptionStatus @default(Undefined)
+  register_at         DateTime           @default(now())
+  verified_at         DateTime?
+}
