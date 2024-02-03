@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "d5614638-5ea0-4b5c-a6fc-0a06f5aa9106",
+		"name": "URL-Shortener Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24222018"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"1234512345\",\r\n    \"identifier\": \"76e1a701-03bf-4b2e-a0e9-46bda1e74276\",\r\n    \"platform\": \"Web\",\r\n    \"version\": \"Chrome (14.2)\",\r\n    \"locale\": \"en-US\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\":\"John\",\r\n    \"lname\": \"rezapour\",\r\n    \"email\": \"john@gmail.com\",\r\n    \"password\": \"1234512345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/auth/register"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
