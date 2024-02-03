@@ -1,0 +1,23 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@app/common": "<rootDir>/../libs/common/src",
+    "@app/jwt/(.*)": "<rootDir>/../libs/jwt/src/$1",
+    "@app/jwt": "<rootDir>/../libs/jwt/src",
+    "@app/interceptors/(.*)": "<rootDir>/../libs/interceptors/src/$1",
+    "@app/interceptors": "<rootDir>/../libs/interceptors/src",
+    "'=/exception-filters/(.*)": "<rootDir>/../libs/exception-filters/src/$1",
+    "'=/exception-filters": "<rootDir>/../libs/exception-filters/src"
+  }
+}

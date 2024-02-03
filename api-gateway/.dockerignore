@@ -1,0 +1,8 @@
+dist
+node_modules
+Dockerfile
+.env
+README.md
+.git
+.gitignore
+prisma/migrations
