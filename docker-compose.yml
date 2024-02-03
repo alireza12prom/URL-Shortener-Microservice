@@ -1,0 +1,104 @@
+version: "3"
+
+services:
+  api-gateway:
+    build:
+      context: /api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+
+    environment:
+      - TZ=UTC
+      - PORT=4000
+      - NODE_ENV=production
+      - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
+      - JWT_SECRET=PzP0uYbDzdydnKytSqaVrtedHStetdpZ4k84wNCi8igBD9nYGiU7653euf0j
+      - JWT_ACCESS_TOKEN_EXPIRE_IN=15m
+      - JWT_REFRESH_TOKEN_EXPIRE_IN=15d
+
+    ports:
+      - 4000:4000
+
+    networks:
+      - rabbitmq
+
+    depends_on:
+      - rabbitmq
+
+  profile-service:
+    build:
+      context: /profile-service
+      dockerfile: Dockerfile
+    container_name: profile-service
+
+    environment:
+      - TZ=UTC
+      - NODE_ENV=production
+      - DATABASE_URL=mysql://root:12345@mysql:3306/profile-service
+      - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
+
+    networks:
+      - rabbitmq
+      - mysql
+
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  session-service:
+    build:
+      context: /session-service
+      dockerfile: Dockerfile
+    container_name: session-service
+
+    environment:
+      - TZ=UTC
+      - NODE_ENV=production
+      - DATABASE_URL=mysql://root:12345@mysql:3306/session-service
+      - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
+
+    networks:
+      - rabbitmq
+      - mysql
+
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+
+    volumes:
+      - ./data:/var/lib/mysql
+
+    networks:
+      - mysql
+
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbit
+
+    ports:
+      - 15672:15672
+
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=12345
+
+    networks:
+      - rabbitmq
+
+    restart: unless-stopped
+
+networks:
+  rabbitmq:
+    driver: bridge
+  mysql:
+    driver: bridge
