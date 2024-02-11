@@ -1,12 +1,14 @@
-version: "3"
+version: "3.8"
 
 services:
   api-gateway:
     build:
-      context: /api-gateway
+      context: ./api-gateway
       dockerfile: Dockerfile
     container_name: api-gateway
-
+    working_dir: /api-gateway
+    command: >
+      sh -c "sleep 15 && npm run start:prod"
     environment:
       - TZ=UTC
       - PORT=4000
@@ -15,52 +17,49 @@ services:
       - JWT_SECRET=PzP0uYbDzdydnKytSqaVrtedHStetdpZ4k84wNCi8igBD9nYGiU7653euf0j
       - JWT_ACCESS_TOKEN_EXPIRE_IN=15m
       - JWT_REFRESH_TOKEN_EXPIRE_IN=15d
-
     ports:
       - 4000:4000
-
     networks:
-      - rabbitmq
-
+      - rabbitmq-net
     depends_on:
       - rabbitmq
 
   profile-service:
     build:
-      context: /profile-service
+      context: ./profile-service
       dockerfile: Dockerfile
     container_name: profile-service
-
+    working_dir: /profile-service
+    command: >
+      sh -c "sleep 15 && npx prisma db push && npm run start:prod"
     environment:
       - TZ=UTC
       - NODE_ENV=production
       - DATABASE_URL=mysql://root:12345@mysql:3306/profile-service
       - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
-
     networks:
-      - rabbitmq
-      - mysql
-
+      - mysql-net
+      - rabbitmq-net
     depends_on:
       - mysql
       - rabbitmq
 
   session-service:
     build:
-      context: /session-service
+      context: ./session-service
       dockerfile: Dockerfile
     container_name: session-service
-
+    working_dir: /session-service
+    command: >
+      sh -c "sleep 15 && npx prisma db push && npm run start:prod"
     environment:
       - TZ=UTC
       - NODE_ENV=production
       - DATABASE_URL=mysql://root:12345@mysql:3306/session-service
       - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
-
     networks:
-      - rabbitmq
-      - mysql
-
+      - mysql-net
+      - rabbitmq-net
     depends_on:
       - mysql
       - rabbitmq
@@ -70,17 +69,17 @@ services:
       context: ./shortener-service
       dockerfile: Dockerfile
     container_name: shortener-service
-
+    working_dir: /shortener-service
+    command: >
+      sh -c "sleep 15 && npx prisma db push && npm run start:prod"
     environment:
       - TZ=UTC
       - NODE_ENV=production
-      - DATABASE_URL=mysql://root:12345@mysql:3306/profile-service
+      - DATABASE_URL=mysql://root:12345@mysql:3306/shortener-service
       - RABBITMQ_URL=amqp://root:12345@rabbitmq:5672/
-
     networks:
-      - rabbitmq
-      - mysql
-
+      - rabbitmq-net
+      - mysql-net
     depends_on:
       - mysql
       - rabbitmq
@@ -88,37 +87,32 @@ services:
   mysql:
     image: mysql:8.3.0
     container_name: mysql
-
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=12345
-
-    volumes:
-      - ./data:/var/lib/mysql
-
+    expose:
+      - 3306:3306
     networks:
-      - mysql
-
-    restart: unless-stopped
+      - mysql-net
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     hostname: rabbit
-
-    ports:
+    restart: unless-stopped
+    expose:
       - 15672:15672
-
+      - 5672:5672
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=12345
-
     networks:
-      - rabbitmq
-
-    restart: unless-stopped
+      - rabbitmq-net
 
 networks:
-  rabbitmq:
+  rabbitmq-net:
+    name: shortener_rabbitmq-net
     driver: bridge
-  mysql:
+  mysql-net:
+    name: shortener_mysql-net
     driver: bridge

@@ -1,4 +1,4 @@
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import {
@@ -7,8 +7,8 @@ import {
   VersioningType,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { FormatResponseInterceptor } from '@app/interceptors';
-import { FormatResponseFilter } from '@app/exception-filters';
+import { FormatResponseInterceptor } from './interceptors';
+import { FormatResponseFilter } from './exception-filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

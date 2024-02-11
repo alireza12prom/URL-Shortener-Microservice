@@ -1,4 +1,4 @@
-import { RPCResponseInterceptor } from 'libs/decorator';
+import { RPCResponseInterceptor } from '../decorator';
 import {
   CreateSessionDto,
   DiscardSessionDto,

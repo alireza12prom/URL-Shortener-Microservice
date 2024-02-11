@@ -17,28 +17,5 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@app/common/interfaces": [
-        "libs/common/interfaces"
-      ],
-      "@app/jwt": [
-        "libs/jwt/src"
-      ],
-      "@app/jwt/*": [
-        "libs/jwt/src/*"
-      ],
-      "@app/interceptors": [
-        "libs/interceptors"
-      ],
-      "@app/interceptors/*": [
-        "libs/interceptors/*"
-      ],
-      "@app/exception-filters": [
-        "libs/exception-filters"
-      ],
-      "@app/exception-filters/*": [
-        "libs/exception-filters/*"
-      ]
-    }
   }
 }

@@ -1,4 +1,4 @@
-import { RPCResponseInterceptor } from '@app/decorator';
+import { RPCResponseInterceptor } from '../decorator';
 import { Controller, Inject, UseInterceptors } from '@nestjs/common';
 import { RabbitPayload, RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
 

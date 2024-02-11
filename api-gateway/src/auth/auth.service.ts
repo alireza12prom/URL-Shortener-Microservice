@@ -1,7 +1,7 @@
-import { TokenService } from '@app/jwt';
+import { TokenService } from '../jwt/src';
 import { LoginDto, RegisterDto } from './dto';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { IRabbitRpcResponse } from '@app/common/interfaces';
+import { IRabbitRpcResponse } from '../common/interfaces';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { createHash } from 'crypto';
 import { ConfigService } from '@nestjs/config';

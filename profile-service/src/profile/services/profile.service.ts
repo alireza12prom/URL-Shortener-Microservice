@@ -1,6 +1,5 @@
-import { ErrorResponseCode } from '@app/common';
 import { Inject, Injectable } from '@nestjs/common';
-import { RabbitRpcException } from '@app/common/rabbit-rpc-exception';
+import { RabbitRpcException, ErrorResponseCode } from '../../common';
 
 import {
   IHashService,

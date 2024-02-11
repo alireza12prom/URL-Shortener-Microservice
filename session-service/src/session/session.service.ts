@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ErrorResponseCode, RabbitRpcException } from '@app/common';
+import { ErrorResponseCode, RabbitRpcException } from '../common';
 
 import {
   ISessionRepository,

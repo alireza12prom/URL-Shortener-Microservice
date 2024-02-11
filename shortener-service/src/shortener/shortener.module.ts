@@ -4,7 +4,7 @@ import { ShortenerController } from './shortener.controller';
 import { LinkRepository } from './repository';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { ConfigService } from '@nestjs/config';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 
 @Module({
   imports: [

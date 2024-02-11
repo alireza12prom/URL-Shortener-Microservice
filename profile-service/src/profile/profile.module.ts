@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ProfileRepository } from './repository';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { ProfileController } from './profile.controller';
 import { ProfileService, HashService } from './services';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';

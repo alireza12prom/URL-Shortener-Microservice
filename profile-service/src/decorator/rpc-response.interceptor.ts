@@ -1,7 +1,7 @@
 import { Message } from 'amqplib';
 import { Observable, catchError, map } from 'rxjs';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { RabbitRpcException } from '@app/common/rabbit-rpc-exception';
+import { RabbitRpcException } from 'src/common/rabbit-rpc-exception';
 
 import {
   CallHandler,

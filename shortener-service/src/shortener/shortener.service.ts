@@ -1,6 +1,5 @@
-import { RabbitRpcException } from 'libs/common';
+import { RabbitRpcException, ErrorResponseCode } from '../common';
 import { Inject, Injectable } from '@nestjs/common';
-import { ErrorResponseCode } from 'libs/common/response-code';
 import {
   ILinkRepository,
   IShortenerService,

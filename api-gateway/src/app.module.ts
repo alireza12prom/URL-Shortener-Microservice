@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { TokenModule } from '@app/jwt';
+import { TokenModule } from './jwt/src';
 
 @Module({
   imports: [

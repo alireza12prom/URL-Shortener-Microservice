@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SessionRepository } from './repository';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { SessionController } from './session.controller';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { SessionService } from './session.service';

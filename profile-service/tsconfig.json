@@ -18,19 +18,5 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
-    "paths": {
-      "@app/common": [
-        "libs/common"
-      ],
-      "@app/common/*": [
-        "libs/common/*"
-      ],
-      "@app/decorator": [
-        "libs/decorator"
-      ],
-      "@app/decorator/*": [
-        "libs/decorator/*"
-      ]
-    }
   }
 }
